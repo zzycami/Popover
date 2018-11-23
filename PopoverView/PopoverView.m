@@ -358,6 +358,9 @@ float PopoverViewDegreesToRadians(float angle)
         _shadeView.alpha = 0.f;
         self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
     } completion:^(BOOL finished) {
+        if (self.onDismiss) {
+            self.onDismiss();
+        }
         [_shadeView removeFromSuperview];
         [self removeFromSuperview];
     }];
