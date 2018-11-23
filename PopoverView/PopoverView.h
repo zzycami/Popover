@@ -9,6 +9,13 @@ typedef NS_ENUM(NSUInteger, PopoverViewArrowStyle) {
     PopoverViewArrowStyleTriangle   // 菱角
 };
 
+@class PopoverView;
+
+@protocol PopoverViewDelegate <NSObject>
+@optional
+- (void) popoverViewDidDissmiss: (PopoverView*) popoverView;
+@end
+
 @interface PopoverView : UIView
 
 /**
@@ -19,7 +26,7 @@ typedef NS_ENUM(NSUInteger, PopoverViewArrowStyle) {
 /**
  当窗口消失完成的时候的回调
  */
-@property (nonatomic, assign) void (^onDismiss)(void);
+@property (nonatomic, weak) id<PopoverViewDelegate> delegate;
 
 /**
  是否显示阴影, 如果为YES则弹窗背景为半透明的阴影层, 否则为透明, 默认为NO.
